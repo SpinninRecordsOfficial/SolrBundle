@@ -4,6 +4,8 @@ namespace FS\SolrBundle\Doctrine\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\AnnotationReader as Reader;
+use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Cache\ArrayCache;
 
 class AnnotationReader
 {
@@ -21,7 +23,7 @@ class AnnotationReader
 
     public function __construct()
     {
-        $this->reader = new Reader();
+        $this->reader = new CachedReader(new Reader(), new ArrayCache());
     }
 
     /**
